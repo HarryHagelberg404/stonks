@@ -13,7 +13,7 @@ To set an alias:
 
 To use in cli you must run it with the following:
 
-- Arg1: Stockname in yfinance.
+- Arg1: Stock ticker code in yfinance.
 - Arg2: Timeframe of days to see backwards.
 
 Usage:
