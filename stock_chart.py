@@ -14,11 +14,16 @@ end_date = today_date
 data = yf.download(stock_symbol, start=start_date, end=end_date + timedelta(1))
 # Extract the Date and Closing Price columns
 dates = data.index
-closing_prices = data["Close"]
 
+closing_prices = data["Close"].squeeze().dropna().astype(float)
 print(f"     Last closing price: {closing_prices.iloc[-1]:.5f}")
 # Convert dates to string in a readable format
 formatted_dates = dates.strftime("%Y-%m-%d")
 
 # Create a line plot using uniplot
-plot = up.plot(closing_prices, range(len(dates)), lines=True, title=f"{stock_symbol} Stock Price Chart ({start_date} - {end_date})")
+plot = up.plot(
+    ys=closing_prices.values.tolist(),
+    xs=list(range(len(closing_prices))),
+    lines=True,
+    title=f"{stock_symbol} Stock Price Chart ({start_date} - {end_date})"
+)
